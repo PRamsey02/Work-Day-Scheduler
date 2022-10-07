@@ -13,3 +13,18 @@
 
 // Current day is displayed at the top of the calendar
 $("#currentDay").text(moment().format('dddd MMMM Do YYYY'));
+
+// Color-coded blocks to indicate whether it is in the past, present, or future
+function timeBlockColor() {
+    var hour = moment().hours();
+    $(".time-block").each(function() {
+        var currentHour = parseInt($(this).attr("id"));
+        if (currentHour > hour ) {
+            $(this).addClass("future");
+        } else if (currentHour === hour) {
+            $(this).addClass("present");
+        } else {
+            $(this).addClass("past");
+        }
+    })
+};

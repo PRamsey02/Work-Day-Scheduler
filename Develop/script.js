@@ -28,3 +28,28 @@ function timeBlockColor() {
         }
     })
 };
+
+var saveBtn = $(".saveBtn");
+
+// Saves user input for time blocks
+saveBtn.on("click", function() {
+    var time = $(this).siblings(".hour").text();
+    var plan = $(this).siblings(".plan").val();
+    // Text for event is saved in local storage
+    localStorage.setItem(time, plan);
+});
+
+// Saves user input so they can view it after refresh
+function usePlanner() {
+    $(".hour").each(function() {
+        var currentHour = $(this).text();
+        var currentPlan = localStorage.getItem(currentHour);
+        if (currentPlan !== null) {
+            $(this).siblings(".plan").val(currentPlan);
+        }
+    });
+}
+
+// Calls functions
+timeBlockColor();
+usePlanner();
